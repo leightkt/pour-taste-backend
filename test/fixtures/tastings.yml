@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  wine: one
+  user: one
+  party: one
+  notes: MyString
+  letter: MyString
+  rating: 1
+
+two:
+  wine: two
+  user: two
+  party: two
+  notes: MyString
+  letter: MyString
+  rating: 1

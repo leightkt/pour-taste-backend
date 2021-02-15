@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  brand: MyString
+  variety: MyString
+  year: MyString
+  wine_type: MyString
+
+two:
+  brand: MyString
+  variety: MyString
+  year: MyString
+  wine_type: MyString
