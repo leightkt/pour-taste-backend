@@ -11,14 +11,22 @@ class PartiesController < ApplicationController
     end
 
     def create
-        @party = Party.where({ user_id: params[:party][:user_id].to_i, date: params[:party][:date]})
+        @user = User.find(params[:party][:user_id])
+        @invites = @user.invitations
+        @party = @invites.select do |invite|
+                    invite.party.date == params[:party][:date]
+                end
         if @party.any? 
-            render json: {errors: "You already have a party on that date"}, status: :unprocessable_entityexit
+            render json: {errors: "You already have a party on that date"}, status: :unprocessable_entity
         else 
-            @party = Party.new(party_params)
+            @party = Party.new(
+                date: params[:party][:date],
+                location: params[:party][:location],
+                time: params[:party][:time],
+            )
             if @party.valid?
                 @party.save
-                render json: @party
+                redirect_to :controller => 'invitations', :action => 'createInvite', :user_id => @user.id, :party_id => @party.id
             else
                 render json: {errors: @party.errors.full_messages}, status: :unprocessable_entity
             end

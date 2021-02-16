@@ -1,8 +1,9 @@
 class User < ApplicationRecord
     has_secure_password
+    has_many :invitations
     has_many :tastings
     has_many :wines, through: :tastings
-    has_many :parties, through: :tastings
+    has_many :parties, through: :invitations
 
     validates :name, :username, :password, :email, presence: true
     validates :username, :email, uniqueness: {message: "should be unique and %{value} is taken."}

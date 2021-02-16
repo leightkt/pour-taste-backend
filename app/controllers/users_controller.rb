@@ -8,10 +8,7 @@ class UsersController < ApplicationController
     end
 
     def show
-        my_parties
-        my_tastings
-        render json: UserSerializer.new(@user, @parties, @tastings).to_serialized_json
-        # render json: @user, include: :parties
+        render json: UserSerializer.new(@user).to_serialized_json
     end
 
     def create
@@ -47,14 +44,6 @@ class UsersController < ApplicationController
         end
     end
     
-    def my_parties
-        @parties = @user.parties.uniq {|party| party.id}
-    end
-
-    def my_tastings
-        @tastings = @user.tastings
-    end
-
     private
 
     def find_user

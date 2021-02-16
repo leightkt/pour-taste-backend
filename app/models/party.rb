@@ -1,7 +1,8 @@
 class Party < ApplicationRecord
   has_many :tastings, dependent: :destroy
-  has_many :users, through: :tastings
+  has_many :invitations, dependent: :destroy
+  has_many :users, through: :invitations
   has_many :wines, through: :tastings
 
-  validates :user_id, :date, :time, :location, presence: true
+  validates :date, :time, :location, presence: true
 end
