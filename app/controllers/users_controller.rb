@@ -8,7 +8,9 @@ class UsersController < ApplicationController
     end
 
     def show
-        render json: UserSerializer.new(@user).to_serialized_json
+        my_parties
+        my_tastings
+        render json: UserSerializer.new(@user, @parties, @tastings).to_serialized_json
         # render json: @user, include: :parties
     end
 
@@ -43,6 +45,14 @@ class UsersController < ApplicationController
         else
             render json: {errors: "Invalid Credentials"}, status: :unauthorized
         end
+    end
+    
+    def my_parties
+        @parties = @user.parties.uniq {|party| party.id}
+    end
+
+    def my_tastings
+        @tastings = @user.tastings
     end
 
     private

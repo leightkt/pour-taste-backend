@@ -1,6 +1,5 @@
 class User < ApplicationRecord
     has_secure_password
-    has_many :parties
     has_many :tastings
     has_many :wines, through: :tastings
     has_many :parties, through: :tastings

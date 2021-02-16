@@ -14,4 +14,4 @@ crimes = Wine.create(brand: "19 crimse", name: "The Banished", variety: "Red Ble
 snoop = Wine.create(brand: "19 crimse", name: "Snoop Cli Red", variety: "Red Blend", year: 2021, wine_type: "red")
 
 Tasting.create(wine: crimes, user: kat, party: party1, notes: "So good", letter: "A", rating: 7)
-Tasting.create(wine: snoop, user: kat, party: party1, notes: "Yum", letter: "B", rating: 9)
+Tasting.create(wine: snoop, user: sam, party: party1, notes: "Yum", letter: "B", rating: 9)

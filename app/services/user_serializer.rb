@@ -1,22 +1,30 @@
 class UserSerializer
-    def initialize user
+    def initialize user, parties, tastings
         @user = user
+        @parties = parties
+        @tastings = tastings
     end
 
     def to_serialized_json
-        options = {
-            include: {
-                parties: {
-                    except: [:created_at, :updated_at], include: {
-                        user: { only: :name}
-                    }
-                },
-                tastings: {
-                    include: :party
-                }
-            },
-            except: [:updated_at, :created_at, :password_digest]
+        find_host
+        userdata = {
+            user: @user, 
+            parties: @hosted_parties,
+            tastings: @tastings
         }
-        @user.to_json(options)
+        
+        userdata.to_json()
+    end
+
+    def find_host   
+        @hosted_parties = []
+        @parties.each do |party|
+            hosted_party =  {
+                party: party,
+                host_id: party.user_id,
+                host: User.find(party.user_id).name
+            }
+            @hosted_parties << hosted_party
+        end
     end
 end
