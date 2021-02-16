@@ -8,7 +8,8 @@ class UsersController < ApplicationController
     end
 
     def show
-        render json: @user
+        render json: UserSerializer.new(@user).to_serialized_json
+        # render json: @user, include: :parties
     end
 
     def create

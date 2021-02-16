@@ -11,12 +11,17 @@ class PartiesController < ApplicationController
     end
 
     def create
-        @party = Party.new(party_params)
-        if @party.valid?
-            @party.save
-            render json: @party
-        else
-            render json: {errors: @party.errors.full_messages}, status: :unprocessable_entity
+        @party = Party.where({ user_id: params[:party][:user_id].to_i, date: params[:party][:date]})
+        if @party.any? 
+            render json: {errors: "You already have a party on that date"}, status: :unprocessable_entityexit
+        else 
+            @party = Party.new(party_params)
+            if @party.valid?
+                @party.save
+                render json: @party
+            else
+                render json: {errors: @party.errors.full_messages}, status: :unprocessable_entity
+            end
         end
     end
 
