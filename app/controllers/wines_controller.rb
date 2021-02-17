@@ -32,7 +32,11 @@ class WinesController < ApplicationController
             })
             if @wine.valid?
                 @wine.save
-                redirect_to :controller => 'tastings', :action => 'addTasting', :user_id => @user.id, :wine_id => @wine.id, :party_id => @party_id
+                redirect_to :controller => 'tastings', 
+                :action => 'addTasting', 
+                :user_id => @user_id, 
+                :wine_id => @wine.id, 
+                :party_id => @party_id
             else
                 render json: {errors: @wine.errors.full_messages}, status: :unprocessable_entity
             end

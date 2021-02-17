@@ -3,5 +3,5 @@ class Wine < ApplicationRecord
     has_many :users, through: :tastings
     has_many :parties, through: :tastings
     
-    validates :brand, :wine_type, :year, presence: true
+    validates :brand, :wine_type, :variety, :year, presence: true
 end

@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   get "/createInvite", to: "invitations#createInvite"
   get "/viewtastings", to: "users#tastings"
   get "/addtastings", to: "tastings#addTasting"
+  post "/partydeets", to: "parties#partydeets"
 end

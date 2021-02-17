@@ -1,5 +1,5 @@
 class PartiesController < ApplicationController
-    before_action :find_party, only: [:show, :update, :destroy]
+    before_action :find_party, only: [:show, :update, :destroy, :partydeets]
 
     def index
         @parties = Party.all
@@ -8,7 +8,13 @@ class PartiesController < ApplicationController
 
     def show
         # render json: @party, include: :wines
-        render json: PartySerializer.new(@party).to_serialized_json
+        @user_id = params[:user_id]
+        render json: PartySerializer.new(@party, @user_id).to_serialized_json
+    end
+
+    def partydeets
+        @user_id = params[:user_id]
+        render json: PartySerializer.new(@party, @user_id).to_serialized_json
     end
 
     def create
