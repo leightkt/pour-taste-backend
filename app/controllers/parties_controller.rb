@@ -7,7 +7,8 @@ class PartiesController < ApplicationController
     end
 
     def show
-        render json: @party
+        # render json: @party, include: :wines
+        render json: PartySerializer.new(@party).to_serialized_json
     end
 
     def create

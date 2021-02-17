@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   resources :users
   post "/login", to: "users#login"
   get "/createInvite", to: "invitations#createInvite"
+  get "/viewtastings", to: "users#tastings"
+  get "/addtastings", to: "tastings#addTasting"
 end

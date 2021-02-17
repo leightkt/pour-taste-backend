@@ -11,12 +11,31 @@ class WinesController < ApplicationController
     end
 
     def create
-        @wine = Wine.new(wine_params)
-        if @wine.valid?
-            @wine.save
-            render json: @wine
-        else
-            render json: {errors: @wine.errors.full_messages}, status: :unprocessable_entity
+        @user_id = params[:wine][:user_id]
+        @party_id = params[:wine][:party_id]
+        @wine = Wine.where({
+            name: params[:wine][:name],
+            brand: params[:wine][:brand],
+            variety: params[:wine][:variety],
+            year: params[:wine][:year],
+            wine_type: params[:wine][:wine_type]
+            })
+        if @wine.any?
+            redirect_to :controller => 'tastings', :action => 'addTasting', :user_id => @user_id, :wine_id => @wine[0].id, :party_id => @party_id
+        else 
+            @wine = Wine.new({
+                name: params[:wine][:name],
+                brand: params[:wine][:brand],
+                variety: params[:wine][:variety],
+                year: params[:wine][:year],
+                wine_type: params[:wine][:wine_type]
+            })
+            if @wine.valid?
+                @wine.save
+                redirect_to :controller => 'tastings', :action => 'addTasting', :user_id => @user.id, :wine_id => @wine.id, :party_id => @party_id
+            else
+                render json: {errors: @wine.errors.full_messages}, status: :unprocessable_entity
+            end
         end
     end
 
@@ -40,6 +59,6 @@ class WinesController < ApplicationController
     end
 
     def wine_params
-        params.require(:wine).permit(:brand, :variety, :name, :year, :wine_type)
+        params.require(:wine).permit(:brand, :variety, :name, :year, :wine_type, :user_id, :party_id)
     end
 end

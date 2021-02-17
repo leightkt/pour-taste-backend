@@ -1,10 +1,14 @@
 class UsersController < ApplicationController
-    before_action :find_user, only: [:show, :destroy, :update]
+    before_action :find_user, only: [:show, :destroy, :update, :tastings]
     # skip_before_action :authorized, only: [:create, :login]
 
     def index
         @users = User.all
         render json: @users
+    end
+
+    def tastings
+        render json: UserSerializer.new(@user).tastings_to_serialized_json
     end
 
     def show

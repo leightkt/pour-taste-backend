@@ -20,6 +20,18 @@ class InvitationsController < ApplicationController
         render json: @invitation
     end
 
+    def destroy
+        @invitation = Invitation.find(params[:id])
+        if params[:host] == true 
+            @party = Party.find(@invitation.party_id)
+            @party.destroy
+            render json: {message: "Party destroyed"}
+        else
+            @invitation.destroy
+            render json: {message: "Inivation destroyed"}
+        end
+    end
+
     private
     
     def invitation_params
