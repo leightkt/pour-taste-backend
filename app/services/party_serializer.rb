@@ -1,5 +1,5 @@
 class PartySerializer
-    def initialize party, user_id
+    def initialize party, user_id = nil
         @party = party
         @user_id = user_id
     end
@@ -18,6 +18,25 @@ class PartySerializer
         
         partyData.to_json()
 
+    end
+
+    def results_to_serialized_json
+        find_host
+        total_wine_scores
+        find_winner
+        sort_scores
+
+        partyData = {
+            party: @party,
+            host: {
+                host_id: @host_id,
+                host_name: @host.name
+            },
+            scores: @scores,
+            winner: @winner
+        }
+        
+        partyData.to_json()
     end
     
     def find_host
@@ -40,5 +59,35 @@ class PartySerializer
             end
         end
         return tastings
+    end
+
+    def total_wine_scores
+        @partywines = @party.wines.uniq{|wine| wine.id}
+
+        @scores = []
+        @partywines.each do |wine|
+            total_rating = wine.tastings.reduce(0) do |sum, tasting|
+                if tasting.party_id == @party.id
+                    sum + tasting.rating.to_f
+                else
+                    sum
+                end
+            end
+            average_rating = (total_rating / wine.tastings.length).round(2)
+            wineData = {
+                wine: wine,
+                score: average_rating
+            }
+            @scores << wineData
+        end
+
+    end
+
+    def sort_scores
+        @scores = @scores.sort_by{|scoreData| scoreData[:score]}.reverse()
+    end
+
+    def find_winner
+        @winner = @scores.max_by {|wineData| wineData[:score]}
     end
 end

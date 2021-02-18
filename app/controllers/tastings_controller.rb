@@ -1,5 +1,5 @@
 class TastingsController < ApplicationController
-    before_action :find_tasting, only: [:show, :update, :destroy]
+    before_action :find_tasting, only: [:show, :update, :destroy, :delete_host_tasting]
 
     def index
         @tastings = Tasting.all
@@ -47,6 +47,14 @@ class TastingsController < ApplicationController
         else
             render json: {errors: @tasting.errors.full_messages}, status: :unprocessable_entity
         end
+    end
+
+    def delete_host_tasting
+        @related_tastings = Tasting.all.select do |tasting|
+            tasting.party_id == @tasting.party_id && tasting.wine_id == @tasting.wine_id
+        end
+        @related_tastings.map{|tasting| tasting.destroy}
+        render json: {message: "Destroyed host and all related tastings"}
     end
 
     def destroy

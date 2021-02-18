@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   get "/viewtastings", to: "users#tastings"
   get "/addtastings", to: "tastings#addTasting"
   post "/partydeets", to: "parties#partydeets"
+  post "/userpartydeets", to: "parties#user_partydeets"
+  delete "/deletetasting", to: "tastings#delete_host_tasting"
 end

@@ -1,5 +1,5 @@
 class PartiesController < ApplicationController
-    before_action :find_party, only: [:show, :update, :destroy, :partydeets]
+    before_action :find_party, only: [:show, :update, :destroy, :partydeets, :user_partydeets]
 
     def index
         @parties = Party.all
@@ -7,13 +7,17 @@ class PartiesController < ApplicationController
     end
 
     def show
-        # render json: @party, include: :wines
-        @user_id = params[:user_id]
-        render json: PartySerializer.new(@party, @user_id).to_serialized_json
+        render json: PartySerializer.new(@party, @user_id).results_to_serialized_json
     end
 
     def partydeets
         @user_id = params[:user_id]
+        render json: PartySerializer.new(@party, @user_id).to_serialized_json
+    end
+
+    def user_partydeets
+        @user_id = params[:user_id]
+        get_host_tastings
         render json: PartySerializer.new(@party, @user_id).to_serialized_json
     end
 
@@ -30,6 +34,7 @@ class PartiesController < ApplicationController
                 date: params[:party][:date],
                 location: params[:party][:location],
                 time: params[:party][:time],
+                party_open: true
             )
             if @party.valid?
                 @party.save
@@ -60,7 +65,36 @@ class PartiesController < ApplicationController
     end
 
     def party_params
-        params.require(:party).permit(:date, :location, :time, :user_id)
+        params.require(:party).permit(:date, :location, :time, :user_id, :party_open)
     end
+
+    def get_host_tastings
+        @host = User.find(@party.invitations.find{|invite| invite.host == true}.user_id)
+        @host_tastings = @host.tastings.select{|tasting| tasting.party_id == @party.id}
+        create_user_tastings
+    end
+
+    def create_user_tastings
+        @host_tastings.map do |tasting|
+            if (tasting_exist(tasting).empty?)
+                Tasting.create({
+                    user_id: @user_id,
+                    party_id: @party.id,
+                    wine_id: tasting.wine_id,
+                    letter: tasting.letter
+                })
+            end
+        end
+    end
+
+    def tasting_exist tasting
+        @tasting = Tasting.where({
+            user_id: @user_id,
+            party_id: @party.id,
+            wine_id: tasting.wine_id,
+        })
+    end
+
+
 
 end

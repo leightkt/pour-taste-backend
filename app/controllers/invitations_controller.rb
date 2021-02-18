@@ -3,7 +3,7 @@ class InvitationsController < ApplicationController
         @invitation = Invitation.new(invitation_params)
         if @invitation.valid?
             @invitation.save
-            render json: @invitation
+            render json: @invitation, include: :party
         else
             render json: {errors: @invitation.errors.full_messages}, status: :unprocessable_entity
         end
@@ -17,7 +17,7 @@ class InvitationsController < ApplicationController
             party_id: @party_id,
             host: true
         )
-        render json: @invitation
+        render json: @invitation, include: :party
     end
 
     def destroy
