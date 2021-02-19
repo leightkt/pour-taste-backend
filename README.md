@@ -75,10 +75,10 @@ Future iterations will allow all the search filters to work in tandem. It may al
 This app was created using Ruby on Rails, JWT, ActiveRecord, Javascript, HTML, CSS, and postgresQL. 
 
 ## DEPLOYMENT
-Backend repo: 
+Frontend repo: https://github.com/leightkt/pour-taste-frontend 
 To use this app, download the backend files from the repo, cd into the backend folder, and run bundle install, then rails db:migrate.  
 Run your rails server on port 9000 with rails s -p 9000.  
 Download the frontend and run lite-server. 
 
 ## DEMONSTRATION
-A demostration of the app can be viewed here:
+A demostration of the app can be viewed here: https://youtu.be/9kxwHwgc114 
