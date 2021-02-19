@@ -3,13 +3,14 @@
 # BLIND TASTE Technical Documentation
 Created by: Kat Leight
 
-BLIND TASTE is a full stack application that allows a user to login and host or join a blind wine tasting party, view party details, and view and search the tastings they've completed.
+BLIND TASTE is a full stack application that allows a user to login and host or join a blind wine tasting party, view party details, rate wines, and view and search the tastings they've completed.
  
 
 ## SUMMARY
-Ever hosted a blind wine tasting party, but then were too drunk to tally up the final scores and determine a winner? Honestly, everyone's a winner at a wine tasting, but this app allows you to easily keep track
-of wine tasting scores, and does the math for you, so all you need to do is worry about what kind of cheese and crackers you're going to serve! Additionally, this app keeps track of the wines you've tasted, so you can
-go back and look at what you liked (or didn't).
+Ever hosted a blind wine tasting party, but then were too drunk to tally up the final scores and determine a winner?  
+Honestly, everyone's a winner at a wine tasting, but this app allows you to easily keep track of wine tasting scores, and does the math for you, so all you need to worry about what kind of cheese and crackers you're going to serve!   Additionally, this app keeps track of the wines you've tasted, so you can go back and look at what you liked (or didn't).  
+
+APP FEATURES
 
 This app allows a user to login with a username and password.  
 A new user can create an account (username must be unique and password must containt and uppercase letter, lowercase letter, number and be at least 6 characters long).
