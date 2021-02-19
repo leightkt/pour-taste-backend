@@ -44,6 +44,7 @@ SET UP YOUR PARTY
 
 Log in and create a new party. Ask each guest to bring two bottles of the same wine in a bag so no one else can see what they've brought. For each wine, put one in a paper bag for party tasting and set one aside as a prize for the winner.  
 Go to your party page and add each bottle wine to your party. The app will assign a letter to the wine. Write this letter on the outside of the paper bag of the wine. It is best to wait until all guests have arrived so you can mix up the order of the tastings.  
+We recommend you ask guests to all bring the same type of wine (Red, white, sparking) for tasting. If you're feeling wild, you can leave it open to wild cards.   
 As your guests arrive direct them to the app and have them join your party using the instructions below by giving your party ID (located on your party page).
 
 JOIN A PARTY
@@ -68,7 +69,7 @@ WINE NAME & WINE VARIETY
 
 Wines will have a name and a variety, sometimes both, or sometimes only one. The wine variety is the varitey of grapes used to make the wine, like Pinot Noir, Chardonnay, or Syrah. Sometimes a wine also has a fancy name like 19 Crimes' "Snoop Cali Red" (variety: Red Blend). To help 
 
-Future iterations could include a connection to an outside API to help autopopulate the add a wine form and further ensure the integrity of the tasting data being stored in the database, an option to join a party by scanning a QR code provided by the host, and an option to take a picture of a wine label and add it to your tasting notes.  
+Future iterations will allow all the search filters to work in tandem. It may also include a connection to an outside API to help autopopulate the add a wine form and further ensure the integrity of the tasting data being stored in the database, an option to join a party by scanning a QR code provided by the host, and an option to take a picture of a wine label and add it to your tasting notes.  
 
 ## TECHNOLOGY
 This app was created using Ruby on Rails, JWT, ActiveRecord, Javascript, HTML, CSS, and postgresQL. 
