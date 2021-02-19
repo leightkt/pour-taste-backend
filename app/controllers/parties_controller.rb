@@ -22,13 +22,14 @@ class PartiesController < ApplicationController
     end
 
     def create
+        byebug
         @user = User.find(params[:party][:user_id])
         @invites = @user.invitations
         @party = @invites.select do |invite|
                     invite.party.date == params[:party][:date]
                 end
         if @party.any? 
-            render json: {errors: "You already have a party on that date"}, status: :unprocessable_entity
+            render json: {errors: ["You already have a party on that date"]}, status: :unprocessable_entity
         else 
             @party = Party.new(
                 date: params[:party][:date],
