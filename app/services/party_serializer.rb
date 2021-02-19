@@ -6,9 +6,11 @@ class PartySerializer
 
     def to_serialized_json
         find_host
+        find_invite
         partyData = {
             party: @party,
             wines: @party.wines,
+            invite: @invite,
             tastings: find_tastings,
             host: {
                 host_id: @host_id,
@@ -47,6 +49,10 @@ class PartySerializer
         @host = User.find(@host_id)
     end
 
+    def find_invite
+        @invite = @party.invitations.find{|invite| invite.user_id == @user_id.to_i}
+    end
+
     def find_tastings
         tastings = []
         User.find(@user_id).tastings.map do |taste|
@@ -67,7 +73,7 @@ class PartySerializer
         @scores = []
         @partywines.each do |wine|
             total_rating = wine.tastings.reduce(0) do |sum, tasting|
-                if tasting.party_id == @party.id
+                if tasting.party_id == @party.id && tasting.user_id != @host_id
                     sum + tasting.rating.to_f
                 else
                     sum

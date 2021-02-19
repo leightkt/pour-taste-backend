@@ -39,6 +39,6 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'mail', '~> 2.6', '>= 2.6.4'
-
 gem 'jwt'
+
+gem 'validates_timeliness', '~> 5.0.0.beta1'
