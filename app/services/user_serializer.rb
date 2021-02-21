@@ -7,7 +7,7 @@ class UserSerializer
         options = {
             include: {
                 invitations: { include: :party, except: [:created_at, :updated_at]}
-            }, except: [:created_at, :updated_at, :password_digest, :email]
+            }, except: [:created_at, :updated_at, :password_digest]
         }
         @user.to_json(options)
     end

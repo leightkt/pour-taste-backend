@@ -26,9 +26,9 @@ class UsersController < ApplicationController
     end
 
     def update
-        if @user.update(user_params)
-            render json: @user
-        else
+        if @user.update(name: params[:user][:name], username: params[:user][:username], email: params[:user][:email], password: params[:user][:password])
+            render json: UserSerializer.new(@user).to_serialized_json
+        else 
             render json: {errors: @user.errors.full_messages}, status: :unprocessable_entity
         end
     end
@@ -57,4 +57,6 @@ class UsersController < ApplicationController
     def user_params
         params.require(:user).permit(:name, :username, :password, :email)
     end
+
+
 end

@@ -1,7 +1,7 @@
 class User < ApplicationRecord
     has_secure_password
-    has_many :invitations
-    has_many :tastings
+    has_many :invitations, dependent: :destroy
+    has_many :tastings, dependent: :destroy
     has_many :wines, through: :tastings
     has_many :parties, through: :invitations
 
