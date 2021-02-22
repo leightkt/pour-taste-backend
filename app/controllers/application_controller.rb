@@ -28,6 +28,6 @@ class ApplicationController < ActionController::API
     end
 
     def secret_key
-        SECRET_KEY_BASE
+        ENV['SECRET_KEY_BASE']
     end
 end
