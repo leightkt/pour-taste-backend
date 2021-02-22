@@ -28,6 +28,6 @@ class ApplicationController < ActionController::API
     end
 
     def secret_key
-        secret_key_base
+        SECRET_KEY_BASE
     end
 end
