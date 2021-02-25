@@ -80,7 +80,9 @@ class PartySerializer
                 end
             end
 
-            if wine.tastings.length = 1
+            if wine.tastings.length == 0 
+                average_rating = 0
+            elsif wine.tastings.length == 1
                 tasting_num = 1
             else
                 tasting_num = wine.tastings.length - 1
