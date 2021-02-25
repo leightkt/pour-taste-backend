@@ -79,7 +79,14 @@ class PartySerializer
                     sum
                 end
             end
-            average_rating = (total_rating / (wine.tastings.length - 1) ).round(2)
+
+            if wine.tastings.length = 1
+                tasting_num = 1
+            else
+                tasting_num = wine.tastings.length - 1
+            end
+
+            average_rating = (total_rating / (tasting_num) ).round(2)
             wineData = {
                 wine: wine,
                 score: average_rating
