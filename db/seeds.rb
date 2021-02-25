@@ -24,8 +24,8 @@ buckchuck = Wine.create(brand: "Charles Shaw", name: "Cabernet Sauvignon", varie
 prisoner = Wine.create(brand: "The Prisoner", name: "Saldo Zinfandel", variety: "Zinfandel", year: 2018, wine_type: "Red")
 dom = Wine.create(brand: "Dom Perignon", name: "Brut Rose", variety: "Champagne", year: 2016, wine_type: "Sparkling")
 
-Tasting.create(wine: crimes, user: sam, party: party3, letter: "A")
-Tasting.create(wine: blind, user: sam, party: party3, letter: "B")
-Tasting.create(wine: buckchuck, user: sam, party: party3, letter: "C")
-Tasting.create(wine: prisoner, user: sam, party: party3, letter: "D")
-Tasting.create(wine: dom, user: sam, party: party3, letter: "E")
+Tasting.create(wine: crimes, user: sam, party_id: party3.id, letter: "A")
+Tasting.create(wine: blind, user: sam, party_id: party3.id, letter: "B")
+Tasting.create(wine: buckchuck, user: sam, party_id: party3.id, letter: "C")
+Tasting.create(wine: prisoner, user: sam, party_id: party3.id, letter: "D")
+Tasting.create(wine: dom, user: sam, party_id: party3.id, letter: "E")
