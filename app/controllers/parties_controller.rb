@@ -22,7 +22,6 @@ class PartiesController < ApplicationController
     end
 
     def create
-        byebug
         @user = User.find(params[:party][:user_id])
         @invites = @user.invitations
         @party = @invites.select do |invite|
